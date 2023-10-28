@@ -5,7 +5,7 @@ import { AuthProvider } from "./Context/AuthContext";
 import { fetchWeatherData } from "./APIfunction/weatherAPI";
 
 function App() {
-  fetchWeatherData()
+  fetchWeatherData("Nagoya");
   return (
     <AuthProvider>
       <div className="App">
