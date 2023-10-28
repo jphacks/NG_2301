@@ -72,6 +72,7 @@ const SignIn = () => {
                 message: "パスワードを入力してください。",
               },
             })}
+            type="password"
             name="password"
             placeholder="password"
             onChange={(event) => handleChangePassword(event)}
