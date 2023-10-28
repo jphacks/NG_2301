@@ -4,11 +4,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { getLocations } from "../firebase/database";
-import {
-  DateTime,
-  Pressure,
-  Location,
-} from "../pressureData/test_pressureData";
+import { weatherDataTimes } from "../APIfunction/weatherAPI";
+import { Pressure, Location } from "../pressureData/test_pressureData";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
@@ -48,7 +45,7 @@ const Home = () => {
           <thead>
             <tr>
               <th>地点</th>
-              {DateTime.map((date) => (
+              {weatherDataTimes().map((date) => (
                 <th key={date}>{date}</th>
               ))}
             </tr>
