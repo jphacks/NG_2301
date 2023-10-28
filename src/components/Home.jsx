@@ -32,25 +32,25 @@ const Home = () => {
       const data = [];
 
       let n = 1;
-      dbLocations.forEach((location) => {
-        const a = async () => {
-          data.push({
+      dbLocations.forEach(async (location) => {
+        data.push({
+          id: location.id,
+          location: location.location,
+
+        });
+        
+        fetchWeatherData(location.location).then((pressure) => {
+          const temp = [];
+          temp.push({
             id: location.id,
             location: location.location,
+            pressures: pressure
           });
-          const pressure = await fetchWeatherData(location.location);
-          console.log(isSubscribe);
-          if (!isSubscribe) {
-            data.push({
-              id: location.id,
-              location: location.location,
-            });
-          }
-        };
-        a();
+          setLocations(temp);
+        });
       });
 
-      setLocations(data);
+      //setLocations(data);
     };
 
     async().then(() => {
@@ -63,6 +63,7 @@ const Home = () => {
   const tableRow = [];
   locations.map((location) => {
     tableRow.push(<td>a</td>);
+   
     const a = async () => {
       tableRow.push(<td>b</td>);
       clearTimeout(await setTimeout(1000000));
@@ -101,10 +102,26 @@ const Home = () => {
             {locations.map((location) => (
               <tr>
                 <td key={location}>{location.location}</td>
-                {/* {location.pressure.map((pressure) => {
-                  <td key={location + pressure}>{pressure}</td>;
-                })} */}
-                {tableRow}
+                <td key={location}>{location.pressures[0].pressure}</td>
+                <td key={location}>{location.pressures[1].pressure}</td>
+                <td key={location}>{location.pressures[2].pressure}</td>
+                <td key={location}>{location.pressures[3].pressure}</td>
+                <td key={location}>{location.pressures[4].pressure}</td>
+                <td key={location}>{location.pressures[5].pressure}</td>
+                <td key={location}>{location.pressures[6].pressure}</td>
+                <td key={location}>{location.pressures[7].pressure}</td>
+                <td key={location}>{location.pressures[8].pressure}</td>
+                <td key={location}>{location.pressures[9].pressure}</td>
+                <td key={location}>{location.pressures[10].pressure}</td>
+                <td key={location}>{location.pressures[11].pressure}</td>
+                <td key={location}>{location.pressures[12].pressure}</td>
+                <td key={location}>{location.pressures[13].pressure}</td>
+                <td key={location}>{location.pressures[14].pressure}</td>
+                <td key={location}>{location.pressures[15].pressure}</td>
+                <td key={location}>{location.pressures[16].pressure}</td>
+                <td key={location}>{location.pressures[17].pressure}</td>
+                <td key={location}>{location.pressures[18].pressure}</td>
+                <td key={location}>{location.pressures[19].pressure}</td>
               </tr>
             ))}
           </tbody>
