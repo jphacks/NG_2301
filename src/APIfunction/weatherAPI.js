@@ -23,32 +23,35 @@ async function fetchWeatherData(location) {
             timeZone: "Asia/Tokyo",
           });
           const pressure = data.list[i].main.pressure;
-          weatherData.push({ pressure });
+          weatherData.push({ jst, pressure });
         }
       }
     });
   return weatherData;
 }
 
-const TIME_INTERVAL = 3;
+const TIME_INTERVAL = 6;
 
-export function weatherDataTimes() {
-  const now = new Date();
+function weatherDataTimes() {
+  const setTimeHours = [0, 6, 12, 18];
+  let nowHour = new Date().getHours();
+  const quo = Math.floor(nowHour / TIME_INTERVAL);
   const times = [];
-
-  for (let i = 1; i < 21; i++) {
-    const time = new Date(now.getTime() + i * TIME_INTERVAL * 60 * 60 * 1000);
-    time.setMinutes(0);
-    time.setSeconds(0);
-
-    const timeString =
-      time.getMonth() + "月" + time.getDate() + "日 " + time.getHours() + "時";
-    times.push(
-      time.getMonth() + "月" + time.getDate() + "日 " + time.getHours() + "時"
-    );
+  let hour;
+  {
+    quo === 3 ? (hour = setTimeHours[0]) : (hour = setTimeHours[quo + 1]);
   }
 
+  for (let i = 0; i < 8; i++) {
+    const time = new Date();
+    time.setHours(hour + i * TIME_INTERVAL);
+    time.setMinutes(0);
+    time.setSeconds(0);
+    console.log(time);
+
+    times.push(time.getDate() + "日" + time.getHours() + "時");
+  }
   return times;
 }
 
-export { fetchWeatherData };
+export { fetchWeatherData, weatherDataTimes };
