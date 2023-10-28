@@ -26,57 +26,25 @@ const Home = () => {
   };
 
   useEffect(() => {
-    let isSubscribe = false;
     const async = async () => {
       const dbLocations = await getLocations(user.uid);
-      const data = [];
-
-      let n = 1;
       dbLocations.forEach(async (location) => {
-        data.push({
-          id: location.id,
-          location: location.location,
-
-        });
-        
-        fetchWeatherData(location.location).then((pressure) => {
+        await fetchWeatherData(location.location).then((pressure) => {
           const temp = [];
           temp.push({
             id: location.id,
             location: location.location,
             pressures: pressure
           });
+          console.log(location.location)
+          
           setLocations(temp);
         });
       });
-
-      //setLocations(data);
     };
 
-    async().then(() => {
-      return () => {
-        isSubscribe = true;
-      };
-    });
+    async();
   }, []);
-
-  const tableRow = [];
-  locations.map((location) => {
-    tableRow.push(<td>a</td>);
-   
-    const a = async () => {
-      tableRow.push(<td>b</td>);
-      clearTimeout(await setTimeout(1000000));
-      tableRow.push(<td>c</td>);
-      const pressure = await fetchWeatherData(location.location);
-      tableRow.push(<td>d</td>);
-    };
-    fetchWeatherData(location.location).then(() => {
-      tableRow.push(<td>f</td>);
-    });
-    a();
-    tableRow.push(<td>e</td>);
-  });
 
   if (!user) {
     return <Navigate to="/signin" />;
