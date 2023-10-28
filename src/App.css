@@ -1,0 +1,8 @@
+.App{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-image: url("./styles/background.jpg");
+    width: 1440px;
+    height: 1024px;
+}
