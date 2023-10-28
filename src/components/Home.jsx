@@ -9,6 +9,7 @@ import {
   Pressure,
   Location,
 } from "../pressureData/test_pressureData";
+import { fetchWeatherData, weatherDataTimes } from "../APIfunction/weatherAPI";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
@@ -25,13 +26,56 @@ const Home = () => {
   };
 
   useEffect(() => {
+    let isSubscribe = false;
     const async = async () => {
       const dbLocations = await getLocations(user.uid);
-      setLocations(dbLocations);
+      const data = [];
+
+      let n = 1;
+      dbLocations.forEach((location) => {
+        const a = async () => {
+          data.push({
+            id: location.id,
+            location: location.location,
+          });
+          const pressure = await fetchWeatherData(location.location);
+          console.log(isSubscribe);
+          if (!isSubscribe) {
+            data.push({
+              id: location.id,
+              location: location.location,
+            });
+          }
+        };
+        a();
+      });
+
+      setLocations(data);
     };
 
-    async();
+    async().then(() => {
+      return () => {
+        isSubscribe = true;
+      };
+    });
   }, []);
+
+  const tableRow = [];
+  locations.map((location) => {
+    tableRow.push(<td>a</td>);
+    const a = async () => {
+      tableRow.push(<td>b</td>);
+      clearTimeout(await setTimeout(1000000));
+      tableRow.push(<td>c</td>);
+      const pressure = await fetchWeatherData(location.location);
+      tableRow.push(<td>d</td>);
+    };
+    fetchWeatherData(location.location).then(() => {
+      tableRow.push(<td>f</td>);
+    });
+    a();
+    tableRow.push(<td>e</td>);
+  });
 
   if (!user) {
     return <Navigate to="/signin" />;
@@ -48,20 +92,21 @@ const Home = () => {
           <thead>
             <tr>
               <th>地点</th>
-              {DateTime.map((date) => (
+              {weatherDataTimes().map((date) => (
                 <th key={date}>{date}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {Location.map((location) => (
-                <td key={location}>{location}</td>
-              ))}
-              {Pressure.map((pressure) => (
-                <td key={pressure}>{pressure}</td>
-              ))}
-            </tr>
+            {locations.map((location) => (
+              <tr>
+                <td key={location}>{location.location}</td>
+                {/* {location.pressure.map((pressure) => {
+                  <td key={location + pressure}>{pressure}</td>;
+                })} */}
+                {tableRow}
+              </tr>
+            ))}
           </tbody>
         </table>
         <button onClick={handleRegister}>地点登録</button>
