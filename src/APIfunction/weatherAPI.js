@@ -30,8 +30,6 @@ async function fetchWeatherData(location) {
   return weatherData;
 }
 
-export { fetchWeatherData };
-
 const TIME_INTERVAL = 3;
 
 export function weatherDataTimes() {
