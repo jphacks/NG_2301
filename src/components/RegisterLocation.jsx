@@ -3,11 +3,14 @@ import { useAuthContext } from "../Context/AuthContext";
 import { useForm } from "react-hook-form";
 import { addLocation } from "../firebase/database";
 import { useState } from "react";
+import { app } from "../../firebase";
+import { getAuth } from "firebase/auth";
 
 const RegisterLocation = () => {
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
   const { user } = useAuthContext();
+  const auth = getAuth(app);
   const {
     register,
     handleSubmit,
@@ -21,7 +24,7 @@ const RegisterLocation = () => {
   const onSubmit = () => {
     console.log(user.uid);
     addLocation(user.uid, location);
-    navigate("Home");
+    navigate(`/${auth.currentUser.uid}`);
     reset();
   };
 
