@@ -2,6 +2,7 @@ import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import "../styles/test.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -29,12 +30,19 @@ const SignIn = () => {
 
   return (
     <div>
-      <h1>ログイン</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div className="title">
+        Atmospheric<br></br>     
+        Pressure<br></br>
+        Forecast<br></br>
+      </div>
+
+      <div className="login">ログイン</div>
+      <div className="line"></div>
+      
+      
       <form onSubmit={handleSubmit}>
         <div>
-          <label>メールアドレス</label>
-          <input
+          <input className="form-text1"
             name="email"
             type="email"
             placeholder="email"
@@ -42,8 +50,7 @@ const SignIn = () => {
           />
         </div>
         <div>
-          <label>パスワード</label>
-          <input
+          <input className="form-text2"
             name="password"
             type="password"
             placeholder="password"
@@ -51,10 +58,12 @@ const SignIn = () => {
           />
         </div>
         <div>
-          <button>ログイン</button>
+          <button className="buttun">ログイン</button>
         </div>
-        <div>
-          ユーザ登録は<Link to={"/signup"}>こちら</Link>から
+        {error && <p style={{color: "red" }}>{error}</p>}
+        <div className="register">
+        登録した場所の気圧の予測データを閲覧できます<br></br>
+        ユーザ登録は<Link to={"/signup"}>こちら</Link>から
         </div>
       </form>
     </div>
