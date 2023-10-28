@@ -2,19 +2,16 @@
  * WeatherAPIをたたいてログ出力する関数
  * @param location
  */
-async function fetchWeatherData(location) {
-  // 天気予報データの定義
+
+import axios from "axios";
+
+const fetchWeatherData = () => {
   const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
-
-  // 天気予報データのURL
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
-
   let weatherData = [];
 
-  // URLを使ってAPIからデータを取得
-  await fetch(url, {
-    method: "get",
-  })
+  axios
+    .get(url)
     .then((res) => res.json())
     .then((data) => {
       for (let i = 0; i < data.list.length; i++) {
@@ -28,7 +25,7 @@ async function fetchWeatherData(location) {
       }
     });
   return weatherData;
-}
+};
 
 const TIME_INTERVAL = 3;
 
