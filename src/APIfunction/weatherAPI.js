@@ -27,7 +27,6 @@ async function fetchWeatherData(location) {
         }
       }
     });
-  console.log(weatherData);
 }
 
 export { fetchWeatherData };
