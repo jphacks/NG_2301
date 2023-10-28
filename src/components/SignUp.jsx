@@ -10,8 +10,7 @@ const SignUp = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const onSignUp = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate("/");

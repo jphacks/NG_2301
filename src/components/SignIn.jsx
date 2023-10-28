@@ -10,8 +10,7 @@ const SignIn = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const onSignIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate(`/${auth.currentUser.uid}`);
