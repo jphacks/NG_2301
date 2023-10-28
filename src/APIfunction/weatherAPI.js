@@ -3,15 +3,19 @@
  * @param location
  */
 
-import axios from "axios";
-
-const fetchWeatherData = () => {
+async function fetchWeatherData(location) {
+  // 天気予報データの定義
   const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
+
+  // 天気予報データのURL
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
+
   let weatherData = [];
 
-  axios
-    .get(url)
+  // URLを使ってAPIからデータを取得
+  await fetch(url, {
+    method: "get",
+  })
     .then((res) => res.json())
     .then((data) => {
       for (let i = 0; i < data.list.length; i++) {
@@ -25,7 +29,7 @@ const fetchWeatherData = () => {
       }
     });
   return weatherData;
-};
+}
 
 const TIME_INTERVAL = 3;
 
