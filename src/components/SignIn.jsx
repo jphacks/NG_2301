@@ -2,7 +2,7 @@ import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Signin.css";
+import "../styles/Signin.scss";
 import { useForm } from "react-hook-form";
 
 const SignIn = () => {
@@ -42,12 +42,14 @@ const SignIn = () => {
   return (
     <div>
       <div className="title">
-        <h1>Atmospheric</h1>
-        <h1>Pressure</h1>
-        <h1>Forecast</h1>
+        <p>Atmospheric</p>
+        <p>Pressure</p>
+        <p>Forecast</p>
       </div>
-      <div className="login">ログイン</div>
-      <div className="line"></div>
+      <div className="login-title">
+        <div className="line"></div>
+        <div className="login">ログイン画面</div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>メールアドレス</label>
@@ -91,8 +93,10 @@ const SignIn = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="register">
-          登録した場所の気圧の予測データを閲覧できます<br></br>
-          ユーザ登録は<Link to={"/signup"}>こちら</Link>から
+          <p>登録した場所の気圧の予測データを閲覧できます</p>
+          <p>
+            ユーザ登録は<Link to={"/signup"}>こちら</Link>から
+          </p>
         </div>
       </form>
     </div>
