@@ -2,7 +2,6 @@ import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -10,14 +9,8 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const auth = getAuth(app);
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
 
-  const onSignIn = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -34,54 +27,31 @@ const SignIn = () => {
     setPassword(event.currentTarget.value);
   };
 
-  const onSubmit = () => {
-    onSignIn();
-    reset();
-  };
-
   return (
     <div>
       <h1>ログイン</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>メールアドレス</label>
           <input
-            {...register("email", {
-              required: {
-                value: true,
-                message: "メールアドレスを入力してください。",
-              },
-              pattern: {
-                value:
-                  /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-                message: "メールアドレスの形式で入力してください。",
-              },
-            })}
             name="email"
+            type="email"
             placeholder="email"
             onChange={(event) => handleChangeEmail(event)}
           />
-          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div>
           <label>パスワード</label>
           <input
-            {...register("password", {
-              required: {
-                value: true,
-                message: "パスワードを入力してください。",
-              },
-            })}
             name="password"
             type="password"
             placeholder="password"
             onChange={(event) => handleChangePassword(event)}
           />
-          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div>
-          <button type="submit">ログイン</button>
+          <button>ログイン</button>
         </div>
         <div>
           ユーザ登録は<Link to={"/signup"}>こちら</Link>から
