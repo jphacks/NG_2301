@@ -17,8 +17,7 @@ const SignUp = () => {
     reset,
   } = useForm();
 
-  const onSignUp = async (event) => {
-    event.preventDefault();
+  const onSignUp = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate("/");

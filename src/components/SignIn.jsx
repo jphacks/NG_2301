@@ -17,8 +17,7 @@ const SignIn = () => {
     reset,
   } = useForm();
 
-  const onSignIn = async (event) => {
-    event.preventDefault();
+  const onSignIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate(`/${auth.currentUser.uid}`);
