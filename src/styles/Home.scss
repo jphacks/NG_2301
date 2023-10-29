@@ -13,11 +13,19 @@
   height: 30px;
   flex-shrink: 0;
   border-radius: 100px;
-  border: 3px solid #2b83c1;
+  border: 3px solid #1370b3;
   background: rgba(136, 196, 240, 0.67);
   color: #ffffff;
 }
 
+.delete_button {
+  width: 60px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  border: 3px solid #88c4f0;
+  background: #f0f0f0;
+}
 table,
 td,
 th {
