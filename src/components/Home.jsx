@@ -55,7 +55,7 @@ const Home = () => {
   useEffect(() => {
     locations.forEach(async (location) => {
       const pressure = await fetchWeatherData(location.location);
-      console.log(pressure);
+      //console.log(pressure);
       setPressures((prev) => ({ ...prev, [location.id]: pressure }));
     });
   }, [locations]);
@@ -64,17 +64,31 @@ const Home = () => {
     if (Object.keys(pressures).length > 0) {
       setPageVisible(true);
 
-      console.log(pressures);
+      //console.log(pressures);
     }
   }, [pressures]);
 
   // tableの行を動的生成
   const rows = locations.map((location) => {
-    console.log(pressures[location.id]?.pressure);
+    const pressureNumData = pressures[location.id];
+    console.log(pressureNumData);
+    if (pressureNumData == undefined) {
+      //console.log("null");
+      return;
+    }
+    const num = pressureNumData[0];
+
     return (
       <tr key={location.id}>
-        <td>{location.location}</td>
-        <td>{pressures[location.id]?.pressure}</td>
+        <td key={location.id}>{location.location}</td>
+        <td key={location.id + 0}>{pressureNumData[0].pressure}</td>
+        <td key={location.id + 1}>{pressureNumData[1].pressure}</td>
+        <td key={location.id + 2}>{pressureNumData[2].pressure}</td>
+        <td key={location.id + 3}>{pressureNumData[3].pressure}</td>
+        <td key={location.id + 4}>{pressureNumData[4].pressure}</td>
+        <td key={location.id + 5}>{pressureNumData[5].pressure}</td>
+        <td key={location.id + 6}>{pressureNumData[6].pressure}</td>
+        <td key={location.id + 7}>{pressureNumData[7].pressure}</td>
       </tr>
     );
   });
