@@ -27,7 +27,7 @@ p {
   gap: 18px;
   flex-shrink: 0;
   .login {
-    color: #000;
+    //color: #000;
     font-family: Inter;
     font-size: 30px;
     font-style: normal;
@@ -47,8 +47,32 @@ p {
   position: relative;
   padding-left: 900px;
   input {
-    width: 200px;
-    height: 20px;
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 3px; /*ボックス角の丸み*/
+    border: 2px solid #ddd; /*枠線*/
+    box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+  }
+
+  span {
+    color: rgb(251, 71, 71);
+  }
+
+  button {
+    height: 30px;
+    width: 300px;
+    margin-top: 20px;
+    background: #81bde8;
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+    border-radius: 100vh;
+    border-color: transparent;
+    /* クリックした際に枠線をnone消す */
+    outline: none;
+    /* 影を消す */
+    box-shadow: none;
   }
 }
 
