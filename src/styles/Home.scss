@@ -1,0 +1,27 @@
+.graph {
+  background: #eef2f5;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.home_button {
+  margin-left: 12px;
+  margin-top: 10px;
+  width: 120px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  border: 3px solid #2b83c1;
+  background: rgba(136, 196, 240, 0.67);
+  color: #ffffff;
+}
+
+table,
+td,
+th {
+  background-color: #ffffff;
+  border: 1px #000 solid;
+  border-collapse: collapse;
+}

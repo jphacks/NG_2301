@@ -29,6 +29,8 @@ import {
 import { Line } from "react-chartjs-2";
 import autocolors from "chartjs-plugin-autocolors";
 
+import "../styles/Home.scss";
+
 ChartJS.register(
   autocolors,
   CategoryScale,
@@ -164,18 +166,13 @@ const Home = () => {
           </thead>
           <tbody>{rows}</tbody>
         </table>
-        <button onClick={handleRegister}>地点登録</button>
-        <button onClick={handleLogout}>ログアウト</button>
-        <div
-          style={{
-            background: "#EEF2f5",
-            marginTop: "10px",
-            marginLeft: "auto",
-            marginRight: "auto",
-            width: "90%",
-            height: "750",
-          }}
-        >
+        <button className="home_button" onClick={handleRegister}>
+          地点登録
+        </button>
+        <button className="home_button" onClick={handleLogout}>
+          ログアウト
+        </button>
+        <div className="graph">
           <Line options={chartOptions} data={chartData} />
         </div>
       </div>
