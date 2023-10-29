@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 
 // Firebaseデータベースの関数の読み込み
 import { getLocations } from "../firebase/database";
-
 // APIから気圧データを取得する関数の読み込み
 import { fetchWeatherData, weatherDataTimes } from "../APIfunction/weatherAPI";
 
@@ -96,40 +95,40 @@ const Home = () => {
   // ユーザーがnullの場合はサインインページへリダイレクト
   if (!user) {
     return <Navigate to="/signin" />;
+  } else {
+    return (
+      <div>
+        <h1>ホームページ</h1>
+        <p>ユーザーそれぞれでurl変えないといけない</p>
+        <p>登録地点</p>
+        {locations.map((location) => (
+          <p key={location.id}>{location.location}</p>
+        ))}
+        <table>
+          <thead>
+            <tr>
+              <th>地点</th>
+              {DateTime.map((date) => (
+                <th key={date}>{date}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {Location.map((location) => (
+                <td key={location}>{location}</td>
+              ))}
+              {Pressure.map((pressure) => (
+                <td key={pressure}>{pressure}</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+        <button onClick={handleRegister}>地点登録</button>
+        <button onClick={handleLogout}>ログアウト</button>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      {pageVisible ? (
-        <>
-          <h1>ホームページ</h1>
-
-          <p>登録地点</p>
-          {locations.map((location) => (
-            <p key={location.id}>{location.location}</p>
-          ))}
-
-          <table>
-            <thead>
-              <tr>
-                <th>地点</th>
-                {weatherDataTimes().map((time) => (
-                  <th key={time}>{time}</th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>{rows}</tbody>
-          </table>
-
-          <button onClick={handleRegister}>地点登録</button>
-          <button onClick={handleLogout}>ログアウト</button>
-        </>
-      ) : (
-        <p>データをロード中...</p>
-      )}
-    </div>
-  );
 };
 
 export { Home };
