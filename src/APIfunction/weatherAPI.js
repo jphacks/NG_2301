@@ -2,6 +2,7 @@
  * WeatherAPIをたたいてログ出力する関数
  * @param location
  */
+
 async function fetchWeatherData(location) {
   // 天気予報データの定義
   const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
