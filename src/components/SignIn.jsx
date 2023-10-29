@@ -2,7 +2,7 @@ import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Sign.scss";
+import "../styles/Signin.scss";
 import { useForm } from "react-hook-form";
 
 const SignIn = () => {
@@ -42,13 +42,17 @@ const SignIn = () => {
   return (
     <div>
       <div className="title">
-        <div className="line"></div>
-        <div className="text">ログイン画面</div>
+        <p>Atmospheric</p>
+        <p>Pressure</p>
+        <p>Forecast</p>
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="login-title">
+        <div className="line"></div>
+        <div className="login">ログイン画面</div>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="input-form">
         <div>
-          <input className="form-text1"
+          <input
             {...register("email", {
               required: {
                 value: true,
@@ -61,13 +65,18 @@ const SignIn = () => {
               },
             })}
             name="email"
-            placeholder="email"
+            placeholder="メールアドレス"
             onChange={(event) => handleChangeEmail(event)}
           />
-          {errors.email && <span className="error1">{errors.email.message}</span>}
+          {errors.email && (
+            <span>
+              <br />
+              {errors.email.message}
+            </span>
+          )}
         </div>
         <div>
-          <input  className="form-text2"
+          <input
             {...register("password", {
               required: {
                 value: true,
@@ -76,19 +85,27 @@ const SignIn = () => {
             })}
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="パスワード"
             onChange={(event) => handleChangePassword(event)}
           />
-          {errors.password && <span className="error2">{errors.password.message}</span>}
+          {errors.password && (
+            <span>
+              <br />
+              {errors.password.message}
+            </span>
+          )}
         </div>
         <div>
-          <button className="buttun" type="submit">ログイン</button>
+          <button type="submit">ログイン</button>
         </div>
-        <div className="change">
-          <p>登録した場所の気圧予報を閲覧できます</p>
-          <p>ユーザ登録は<Link to={"/signup"}>こちら</Link>から</p>
-        </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
+      <div className="register">
+        <p>登録した場所の気圧の予測データを閲覧できます</p>
+        <p>
+          ユーザ登録は<Link to={"/signup"}>こちら</Link>から
+        </p>
+      </div>
     </div>
   );
 };
