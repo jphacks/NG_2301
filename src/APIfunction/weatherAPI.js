@@ -48,7 +48,6 @@ function weatherDataTimes() {
     time.setHours(hour + i * TIME_INTERVAL);
     time.setMinutes(0);
     time.setSeconds(0);
-    console.log(time);
 
     times.push(time.getDate() + "日" + time.getHours() + "時");
   }

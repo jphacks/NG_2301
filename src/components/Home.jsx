@@ -54,7 +54,7 @@ const Home = () => {
   useEffect(() => {
     locations.forEach(async (location) => {
       const pressure = await fetchWeatherData(location.location);
-      //console.log(pressure);
+
       setPressures((prev) => ({ ...prev, [location.id]: pressure }));
     });
   }, [locations]);
@@ -62,17 +62,13 @@ const Home = () => {
   useEffect(() => {
     if (Object.keys(pressures).length > 0) {
       setPageVisible(true);
-
-      //console.log(pressures);
     }
   }, [pressures]);
 
   // tableの行を動的生成
   const rows = locations.map((location) => {
     const pressureNumData = pressures[location.id];
-    console.log(pressureNumData);
     if (pressureNumData == undefined) {
-      //console.log("null");
       return;
     }
     const num = pressureNumData[0];
@@ -108,21 +104,12 @@ const Home = () => {
           <thead>
             <tr>
               <th>地点</th>
-              {DateTime.map((date) => (
+              {weatherDataTimes().map((date) => (
                 <th key={date}>{date}</th>
               ))}
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              {Location.map((location) => (
-                <td key={location}>{location}</td>
-              ))}
-              {Pressure.map((pressure) => (
-                <td key={pressure}>{pressure}</td>
-              ))}
-            </tr>
-          </tbody>
+          <tbody>{rows}</tbody>
         </table>
         <button onClick={handleRegister}>地点登録</button>
         <button onClick={handleLogout}>ログアウト</button>

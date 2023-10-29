@@ -22,7 +22,6 @@ const RegisterLocation = () => {
     setLocation(event.currentTarget.value);
   };
   const onSubmit = () => {
-    console.log(user.uid);
     addLocation(user.uid, location);
     navigate(`/${auth.currentUser.uid}`);
     reset();
