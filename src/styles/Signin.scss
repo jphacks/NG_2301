@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  padding-left: 63px;
+  padding-top: 79px;
+  p {
+    width: 783px;
+    flex-shrink: 0;
+    color: #fff;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.login-title {
+  padding-left: 63px;
+  display: flex;
+  width: 441px;
+  gap: 18px;
+  flex-shrink: 0;
+  .login {
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+  .line {
+    width: 10px;
+    height: 50px;
+    flex-shrink: 0;
+    border-left: 8px solid #000;
+    background: #d9d9d9;
+  }
+}
+
+.input-form {
+  position: relative;
+  padding-left: 900px;
+  input {
+    width: 200px;
+    height: 20px;
+  }
+}
+
+.register {
+  position: absolute;
+  top: 500px;
+  left: 63px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  color: #000;
+}
