@@ -3,6 +3,7 @@ import { app } from "../../firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import "../styles/Signup.scss";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -41,14 +42,18 @@ const SignUp = () => {
   return (
     <div>
       <div className="title">
+        <p>Atmospheric</p>
+        <p>Pressure</p>
+        <p>Forecast</p>
+      </div>
+      <div className="login-title">
         <div className="line"></div>
-        <div className="text">ユーザー登録</div>
+        <div className="login">新規登録</div>
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="input-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
-            className="form-text1"
             {...register("email", {
               required: {
                 value: true,
@@ -61,16 +66,18 @@ const SignUp = () => {
               },
             })}
             name="email"
-            placeholder="email"
+            placeholder="メールアドレス"
             onChange={(event) => handleChangeEmail(event)}
           />
           {errors.email && (
-            <span className="error1">{errors.email.message}</span>
+            <span>
+              <br />
+              {errors.email.message}
+            </span>
           )}
         </div>
         <div>
           <input
-            className="form-text2"
             {...register("password", {
               required: {
                 value: true,
@@ -79,24 +86,27 @@ const SignUp = () => {
             })}
             name="password"
             type="password"
-            placeholder="password"
+            placeholder="パスワード"
             onChange={(event) => handleChangePassword(event)}
           />
           {errors.password && (
-            <span className="error2">{errors.password.message}</span>
+            <span>
+              <br />
+              {errors.password.message}
+            </span>
           )}
         </div>
         <div>
-          <button className="buttun" type="submit">
+          <button className="submit" type="submit">
             登録
           </button>
         </div>
-        <div className="change">
-          <p>
-            ユーザ登録済の場合は<Link to={"/signin"}>こちら</Link>から
-          </p>
-        </div>
       </form>
+      <div className="register">
+        <p>
+          ユーザ登録済の場合は<Link to={"/signin"}>こちら</Link>から
+        </p>
+      </div>
     </div>
   );
 };
