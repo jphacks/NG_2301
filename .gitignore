@@ -28,5 +28,4 @@ dist-ssr
 firebase-debug.log
 .firebase/*
 
-.delopy
-.deploy/*
+delopy
