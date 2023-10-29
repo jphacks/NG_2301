@@ -2,9 +2,7 @@ import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Sign.scss";
 import { useForm } from "react-hook-form";
-
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -49,7 +47,8 @@ const SignUp = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <input className="form-text1"
+          <input
+            className="form-text1"
             {...register("email", {
               required: {
                 value: true,
@@ -65,10 +64,13 @@ const SignUp = () => {
             placeholder="email"
             onChange={(event) => handleChangeEmail(event)}
           />
-          {errors.email && <span className="error1">{errors.email.message}</span>}
+          {errors.email && (
+            <span className="error1">{errors.email.message}</span>
+          )}
         </div>
         <div>
-          <input className="form-text2"
+          <input
+            className="form-text2"
             {...register("password", {
               required: {
                 value: true,
@@ -80,13 +82,19 @@ const SignUp = () => {
             placeholder="password"
             onChange={(event) => handleChangePassword(event)}
           />
-          {errors.password && <span className="error2">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="error2">{errors.password.message}</span>
+          )}
         </div>
         <div>
-          <button className="buttun" type="submit">登録</button>
+          <button className="buttun" type="submit">
+            登録
+          </button>
         </div>
         <div className="change">
-          <p>ユーザ登録済の場合は<Link to={"/signin"}>こちら</Link>から</p>
+          <p>
+            ユーザ登録済の場合は<Link to={"/signin"}>こちら</Link>から
+          </p>
         </div>
       </form>
     </div>
