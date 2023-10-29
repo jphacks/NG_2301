@@ -15,6 +15,43 @@ import { getLocations } from "../firebase/database";
 // APIから気圧データを取得する関数の読み込み
 import { fetchWeatherData, weatherDataTimes } from "../APIfunction/weatherAPI";
 
+// チャートJS関連
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+// chartOptions
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "気圧変動グラフ",
+    },
+  },
+};
+
 const Home = () => {
   // ナビゲーション関数
   const navigate = useNavigate();
@@ -88,6 +125,30 @@ const Home = () => {
     );
   });
 
+  const chartDatasets = [];
+
+  // データセットの作成
+  locations.forEach((location) => {
+    const pressureNumData = pressures[location.id];
+    if (pressureNumData == undefined) {
+      return;
+    }
+
+    chartDatasets.push({
+      label: location.location,
+      data: pressureNumData.map((pressureData) => {
+        return pressureData.pressure;
+      }),
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    });
+  });
+
+  const chartData = {
+    labels: weatherDataTimes(),
+    datasets: chartDatasets,
+  };
+
   // ユーザーがnullの場合はサインインページへリダイレクト
   if (!user) {
     return <Navigate to="/signin" />;
@@ -111,6 +172,9 @@ const Home = () => {
           </thead>
           <tbody>{rows}</tbody>
         </table>
+        <div>
+          <Line options={chartOptions} data={chartData} />
+        </div>
         <button onClick={handleRegister}>地点登録</button>
         <button onClick={handleLogout}>ログアウト</button>
       </div>
