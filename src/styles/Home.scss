@@ -27,9 +27,20 @@
   background: #f0f0f0;
 }
 table,
-td,
-th {
+td {
+  margin: 20px;
   background-color: #ffffff;
   border: 1px #000 solid;
   border-collapse: collapse;
+  text-align: center;
+}
+
+table th {
+  background-size: 35px;
+  border: 1px #000 solid;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
 }
