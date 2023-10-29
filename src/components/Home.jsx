@@ -27,8 +27,10 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import autocolors from "chartjs-plugin-autocolors";
 
 ChartJS.register(
+  autocolors,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -137,8 +139,6 @@ const Home = () => {
       data: pressureNumData.map((pressureData) => {
         return pressureData.pressure;
       }),
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
     });
   });
 
