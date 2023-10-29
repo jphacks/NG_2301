@@ -11,7 +11,7 @@ import { useAuthContext } from "../Context/AuthContext";
 import { useState, useEffect } from "react";
 
 // Firebaseデータベースの関数の読み込み
-import { getLocations } from "../firebase/database";
+import { getLocations, removeLocation } from "../firebase/database";
 // APIから気圧データを取得する関数の読み込み
 import { fetchWeatherData, weatherDataTimes } from "../APIfunction/weatherAPI";
 
@@ -110,6 +110,24 @@ const Home = () => {
     if (pressureNumData == undefined) {
       return;
     }
+
+    const handleClick = () => {
+      removeLocation(user.uid, location.id);
+
+      // データを一時的に全削除
+      setLocations(
+        locations.filter((arrayData) => {
+          return arrayData != location;
+        })
+      );
+      setPressures(
+        pressures.filter((arrayData) => {
+          return arrayData != pressureNumData;
+        })
+      );
+      return;
+    };
+
     return (
       <tr key={location.id}>
         <td key={location.id}>{location.location}</td>
@@ -121,6 +139,9 @@ const Home = () => {
         <td key={location.id + 5}>{pressureNumData[5].pressure}</td>
         <td key={location.id + 6}>{pressureNumData[6].pressure}</td>
         <td key={location.id + 7}>{pressureNumData[7].pressure}</td>
+        <td key={location.id + "delete"}>
+          <button onClick={() => handleClick()}>削除</button>
+        </td>
       </tr>
     );
   });
@@ -160,6 +181,7 @@ const Home = () => {
               {weatherDataTimes().map((date) => (
                 <th key={date}>{date}</th>
               ))}
+              <th></th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
