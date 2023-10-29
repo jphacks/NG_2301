@@ -26,6 +26,4 @@ dist-ssr
 # Firebase Hosting
 # firebaserc
 firebase-debug.log
-.firebase
-
-public/*
+.firebase/*
