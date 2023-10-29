@@ -108,8 +108,6 @@ const Home = () => {
     if (pressureNumData == undefined) {
       return;
     }
-    const num = pressureNumData[0];
-
     return (
       <tr key={location.id}>
         <td key={location.id}>{location.location}</td>
@@ -155,12 +153,6 @@ const Home = () => {
   } else {
     return (
       <div>
-        <h1>ホームページ</h1>
-        <p>ユーザーそれぞれでurl変えないといけない</p>
-        <p>登録地点</p>
-        {locations.map((location) => (
-          <p key={location.id}>{location.location}</p>
-        ))}
         <table>
           <thead>
             <tr>

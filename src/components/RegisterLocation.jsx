@@ -35,7 +35,7 @@ const RegisterLocation = () => {
         <h1>地点登録</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>登録地点 (住所可)</label>
+            <label>登録地点 (都市名)</label>
             <input
               {...register("location", {
                 required: {
