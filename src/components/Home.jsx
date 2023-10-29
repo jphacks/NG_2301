@@ -141,6 +141,10 @@ const Home = () => {
         <td key={location.id + 5}>{pressureNumData[5].pressure}</td>
         <td key={location.id + 6}>{pressureNumData[6].pressure}</td>
         <td key={location.id + 7}>{pressureNumData[7].pressure}</td>
+        <td key={location.id + 8}>{pressureNumData[8].pressure}</td>
+        <td key={location.id + 9}>{pressureNumData[9].pressure}</td>
+        <td key={location.id + 10}>{pressureNumData[10].pressure}</td>
+        <td key={location.id + 11}>{pressureNumData[11].pressure}</td>
         <td key={location.id + "delete"}>
           <button className="delete_button" onClick={() => handleClick()}>
             削除

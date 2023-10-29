@@ -19,22 +19,21 @@ async function fetchWeatherData(location) {
     .then((res) => res.json())
     .then((data) => {
       for (let i = 0; i < data.list.length; i++) {
-        if (i % 2 === 0) {
-          const jst = new Date(data.list[i].dt * 1000).toLocaleString("ja-JP", {
-            timeZone: "Asia/Tokyo",
-          });
-          const pressure = data.list[i].main.pressure;
-          weatherData.push({ jst, pressure });
-        }
+        const jst = new Date(data.list[i].dt * 1000).toLocaleString("ja-JP", {
+          timeZone: "Asia/Tokyo",
+        });
+        const pressure = data.list[i].main.pressure;
+        weatherData.push({ jst, pressure });
       }
     });
   return weatherData;
 }
 
-const TIME_INTERVAL = 6;
+const TIME_INTERVAL = 3;
+const COUNT = 12;
 
 function weatherDataTimes() {
-  const setTimeHours = [0, 6, 12, 18];
+  const setTimeHours = [0, 3, 6, 9, 12, 15, 18, 21];
   let nowHour = new Date().getHours();
   const quo = Math.floor(nowHour / TIME_INTERVAL);
   const times = [];
@@ -43,7 +42,7 @@ function weatherDataTimes() {
     quo === 3 ? (hour = setTimeHours[0]) : (hour = setTimeHours[quo + 1]);
   }
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < COUNT; i++) {
     const time = new Date();
     time.setHours(hour + i * TIME_INTERVAL);
     time.setMinutes(0);
