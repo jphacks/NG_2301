@@ -27,3 +27,6 @@ dist-ssr
 # firebaserc
 firebase-debug.log
 .firebase/*
+
+.delopy
+.deploy/*
