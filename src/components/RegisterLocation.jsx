@@ -5,6 +5,7 @@ import { addLocation } from "../firebase/database";
 import { useState } from "react";
 import { app } from "../../firebase";
 import { getAuth } from "firebase/auth";
+import "../styles/RegisterLocation.scss";
 
 const RegisterLocation = () => {
   const [location, setLocation] = useState("");
@@ -31,11 +32,12 @@ const RegisterLocation = () => {
     return <Navigate to="/signin" />;
   } else {
     return (
-      <div>
+      <div className="main">
         <h1>地点登録</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>登録地点 (都市名)</label>
+            <br />
             <input
               {...register("location", {
                 required: {
@@ -45,6 +47,7 @@ const RegisterLocation = () => {
               })}
               name="location"
               placeholder="location"
+              className="location"
               onChange={(event) => handleChangeLocation(event)}
             />
             {errors.email && <span>{errors.email.message}</span>}
