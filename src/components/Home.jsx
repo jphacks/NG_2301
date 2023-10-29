@@ -164,11 +164,20 @@ const Home = () => {
           </thead>
           <tbody>{rows}</tbody>
         </table>
-        <div>
-          <Line options={chartOptions} data={chartData} />
-        </div>
         <button onClick={handleRegister}>地点登録</button>
         <button onClick={handleLogout}>ログアウト</button>
+        <div
+          style={{
+            background: "#EEF2f5",
+            marginTop: "10px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            width: "90%",
+            height: "750",
+          }}
+        >
+          <Line options={chartOptions} data={chartData} />
+        </div>
       </div>
     );
   }
